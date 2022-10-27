@@ -21,6 +21,7 @@ new L.esri.basemapLayer('ImageryLabels').addTo(map);
 // Edit to upload GeoJSON data file from your local directory
 $.getJSON("test-program-sites.geojson", function (data) {
  geoJsonLayer = L.geoJson(data, {
+  return (feature.properties.Program === "Marine"),
     style: {
       color: '#42ff3f', 
       weight:4, 
@@ -32,23 +33,8 @@ controlLayers.addOverlay(geoJsonLayer, 'Programs');
 
 });
 
-var activeLayer = L.geoJson(yourGeoJson, {
-  filter: function(feature, layer) {
-    return (feature.properties.Program === "Marine");
-  }
-}).addTo(map);
 
-var newLayer = L.geoJson(yourGeoJson, {
-  filter: function(feature, layer) {
-    return (feature.properties.Program === "Human Wildlife Interactions");
-  }
-}).addTo(map);
 
-var doneLayer = L.geoJson(yourGeoJson, {
-  filter: function(feature, layer) {
-    return (feature.properties.Program === "Great Indian Bustard");
-  }
-}).addTo(map);
 
 
 // This highlights the layer on hover, also for mobile
