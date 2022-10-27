@@ -32,36 +32,6 @@ controlLayers.addOverlay(geoJsonLayer, 'Programs');
 
 });
 
-$.getJSON("test-program-sites.geojson", function (data) {
-var marine = L.geoJson(data, {
-  filter: function(feature, layer) {
-    return (feature.properties.Program === "Marine");
-  }
-}).addTo(map);
-controlLayers.addOverlay(geoJsonLayer, 'Marine Program Sites');
-
-});
-
-
-$.getJSON("test-program-sites.geojson", function (data) {
-var marine = L.geoJson(data, {
-  filter: function(feature, layer) {
-    return (feature.properties.Program === "Great Indian Bustard");
-  }
-}).addTo(map);
-controlLayers.addOverlay(geoJsonLayer, 'Great Indian Bustard Program Sites');
-
-});
-
-$.getJSON("test-program-sites.geojson", function (data) {
-var marine = L.geoJson(data, {
-  filter: function(feature, layer) {
-    return (feature.properties.Program === "Human-Wildlife Interactions");
-  }
-}).addTo(map);
-controlLayers.addOverlay(geoJsonLayer, 'Human-Wildlife Interactions Program Sites');
-
-});
 
 
 
@@ -113,7 +83,7 @@ info.onAdd = function (map) {
 // Edit info box text and variables (such as elderly density 2014) to match those in your GeoJSON data
 info.update = function (props) {
   this._div.innerHTML = '<h4>PROGRAMS OF WCS-INDIA<br />Project Sites</h4>' +  (props ?
-    '<b>' + props.Program + ' Program' +'</b><br />' + props.Site + '</b><br />' : 'Click');
+    '<b>' + props.Program + ' Program' +'</b><br />' + props.Site + '</b><br />' + props.description + '</b><br />' : 'Click on feature to know more');
 };  
 
 
