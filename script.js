@@ -1,8 +1,8 @@
 // Edit the center point and zoom level
 var map = L.map('map', {
-  center: [27.355459,93.486109],
-  zoom: 11  ,
-  minZoom : 5,
+  center: [17.876475, 77.379697],
+  zoom: 5  ,
+  minZoom : 2,
   scrollWheelZoom: true
 });
 
@@ -12,17 +12,6 @@ var controlLayers = L.control.layers( null, null, {
      position:"topleft",
      collapsed: false // truw = closed by default
     }).addTo(map);
-
-// new L.tileLayer('https://{s}.tile.thunderforest.com/mobile-atlas/{z}/{x}/{y}.png', {
-//   attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-//   ,var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-//         attribution: '©OpenStreetMap, ©CartoDB'
-// }).addTo(map);
-
-
-// Edit links to your GitHub repo and data source credit
-// map.attributionControl.addAttribution('View <a href="https://github.com/monsoonforest/senior-citizens-sagalee">open-source code on GitHub</a>');
-// map.attributionControl.addAttribution('Population data &copy; <a href="https://eci.gov.in/">ECI India </a>');
 
 
 new L.esri.basemapLayer('Imagery').addTo(map);
@@ -88,10 +77,36 @@ info.onAdd = function (map) {
 
 // Edit info box text and variables (such as elderly density 2014) to match those in your GeoJSON data
 info.update = function (props) {
-  this._div.innerHTML = '<h4>Sagalee Constituency<br />Population of Senior Citizens 2020</h4>' +  (props ?
+  this._div.innerHTML = '<h4>PROGRAMS OF WCS-INDIA<br />Project Sites</h4>' +  (props ?
     '<b>' + props.Program + ' ' + props.Site + '</b><br />' : 'Click');
 };  
 
 
 info.addTo(map);
 
+
+// Use in info.update if GeoJSON data contains null values, and if so, displays "--"
+function checkNull(val) {
+  if (val != null || val == "NaN") {
+    return comma(val);
+  } else {
+    return "--";
+  }
+}
+
+// Use in info.update if GeoJSON data needs to be displayed as a percentage
+function checkThePct(a,b) {
+  if (a != null && b != null) {
+    return Math.round(a/b*1000)/10 + "%";
+  } else {
+    return "--";
+  }
+}
+
+// Use in info.update if GeoJSON data needs to be displayed with commas (such as 123,456)
+function comma(val){
+  while (/(\d+)(\d{3})/.test(val.toString())){
+    val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
+  }
+  return val;
+}
