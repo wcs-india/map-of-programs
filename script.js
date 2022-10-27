@@ -78,7 +78,7 @@ info.onAdd = function (map) {
 // Edit info box text and variables (such as elderly density 2014) to match those in your GeoJSON data
 info.update = function (props) {
   this._div.innerHTML = '<h4>PROGRAMS OF WCS-INDIA<br />Project Sites</h4>' +  (props ?
-    '<b>' + props.Program + ' ' + props.Site + '</b><br />' : 'Click');
+    '<b>' + props.Program + '</b><br />' + props.Site + '</b><br />' : 'Click');
 };  
 
 
