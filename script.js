@@ -21,30 +21,14 @@ new L.esri.basemapLayer('ImageryLabels').addTo(map);
 // Edit to upload GeoJSON data file from your local directory
 $.getJSON("test-program-sites.geojson", function (data) {
  geoJsonLayer = L.geoJson(data, {
-  return (feature.properties.Program === "Marine"),
-    style: {
+      style: {
       color: '#42ff3f', 
       weight:4, 
       fillOpacity: 0
     },
     onEachFeature: onEachFeature
   }).addTo(map);
-controlLayers.addOverlay(geoJsonLayer, 'Marine Program');
-
-});
-
-// Edit to upload GeoJSON data file from your local directory
-$.getJSON("test-program-sites.geojson", function (data) {
- geoJsonLayer = L.geoJson(data, {
-  return (feature.properties.Program === "Great Indian Bustard"),
-    style: {
-      color: '#42ff3f', 
-      weight:4, 
-      fillOpacity: 0
-    },
-    onEachFeature: onEachFeature
-  }).addTo(map);
-controlLayers.addOverlay(geoJsonLayer, 'Great Indian Bustard Program');
+controlLayers.addOverlay(geoJsonLayer, 'Programs');
 
 });
 
