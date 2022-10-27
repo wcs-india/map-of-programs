@@ -32,6 +32,37 @@ controlLayers.addOverlay(geoJsonLayer, 'Programs');
 
 });
 
+$.getJSON("test-program-sites.geojson", function (data) {
+var marine = L.geoJson(data, {
+  filter: function(feature, layer) {
+    return (feature.properties.Program === "Marine");
+  }
+}).addTo(map);
+controlLayers.addOverlay(geoJsonLayer, 'Marine Program Sites');
+
+});
+
+
+$.getJSON("test-program-sites.geojson", function (data) {
+var marine = L.geoJson(data, {
+  filter: function(feature, layer) {
+    return (feature.properties.Program === "Great Indian Bustard");
+  }
+}).addTo(map);
+controlLayers.addOverlay(geoJsonLayer, 'Great Indian Bustard Program Sites');
+
+});
+
+$.getJSON("test-program-sites.geojson", function (data) {
+var marine = L.geoJson(data, {
+  filter: function(feature, layer) {
+    return (feature.properties.Program === "Human-Wildlife Interactions");
+  }
+}).addTo(map);
+controlLayers.addOverlay(geoJsonLayer, 'Human-Wildlife Interactions Program Sites');
+
+});
+
 
 
 // This highlights the layer on hover, also for mobile
@@ -64,7 +95,7 @@ function zoomToFeature(e) {
 function onEachFeature(feature, layer) {
   layer.on({
     mouseover: highlightFeature,
-    mouseout: resethighlight,
+    mouseout: resetHighlight,
     click: highlightFeature,
     click: zoomToFeature
   });
