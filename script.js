@@ -65,7 +65,7 @@ function zoomToFeature(e) {
 function onEachFeature(feature, layer) {
   layer.on({
     mouseover: highlightFeature,
-    mouseout: resetHighlight,
+    //mouseout: resetHighlight,
     click: highlightFeature,
     click: zoomToFeature
   });
@@ -83,7 +83,7 @@ info.onAdd = function (map) {
 // Edit info box text and variables (such as elderly density 2014) to match those in your GeoJSON data
 info.update = function (props) {
   this._div.innerHTML = '<h4>PROGRAMS OF WCS-INDIA<br />Project Sites</h4>' +  (props ?
-    '<b>' + props.Program + ' Program' +'</b><br />' + props.Site + '</b><br />' + props.description + '</b><br />' : 'Click on feature to know more');
+    '<b>' + props.Program + ' Program' +'</b><br />' + props.Site + '</b><br />' + props.image +'</b><br />' + props.description + '</b><br />' : 'Click on feature to know more');
 };  
 
 
