@@ -23,7 +23,7 @@ $.getJSON("test-program-sites.geojson", function (data) {
  geoJsonLayer = L.geoJson(data, {
     style: {
       color: '#42ff3f', 
-      weight:3, 
+      weight:4, 
       fillOpacity: 0
     },
     onEachFeature: onEachFeature
@@ -31,6 +31,24 @@ $.getJSON("test-program-sites.geojson", function (data) {
 controlLayers.addOverlay(geoJsonLayer, 'Programs');
 
 });
+
+var activeLayer = L.geoJson(yourGeoJson, {
+  filter: function(feature, layer) {
+    return (feature.properties.Program === "Marine");
+  }
+}).addTo(map);
+
+var newLayer = L.geoJson(yourGeoJson, {
+  filter: function(feature, layer) {
+    return (feature.properties.Program === "Human Wildlife Interactions");
+  }
+}).addTo(map);
+
+var doneLayer = L.geoJson(yourGeoJson, {
+  filter: function(feature, layer) {
+    return (feature.properties.Program === "Great Indian Bustard");
+  }
+}).addTo(map);
 
 
 // This highlights the layer on hover, also for mobile
