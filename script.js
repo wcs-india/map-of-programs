@@ -17,11 +17,6 @@ var controlLayers = L.control.layers( null, null, {
 new L.esri.basemapLayer('Imagery').addTo(map);
 new L.esri.basemapLayer('ImageryLabels').addTo(map);
 
-// $.getJSON("arunachal-pradesh-districts.geojson", function (data) {
-//   geoJsonLayer = L.geoJson(data, {
-//     style: {color: '#42ff3f', weight:1, fillOpacity: 0}
-//   }).addTo(map);
-// });
 
 // Edit to upload GeoJSON data file from your local directory
 $.getJSON("test-program-sites.geojson", function (data) {
@@ -68,7 +63,7 @@ function zoomToFeature(e) {
 function onEachFeature(feature, layer) {
   layer.on({
     mouseover: highlightFeature,
-    mouseout: resetHighlight,
+    mouseout: highlightFeature,
     click: highlightFeature,
     click: zoomToFeature
   });
@@ -86,7 +81,7 @@ info.onAdd = function (map) {
 // Edit info box text and variables (such as elderly density 2014) to match those in your GeoJSON data
 info.update = function (props) {
   this._div.innerHTML = '<h4>PROGRAMS OF WCS-INDIA<br />Project Sites</h4>' +  (props ?
-    '<b>' + props.Program + '</b><br />' + props.Site + '</b><br />' : 'Click');
+    '<b>' + props.Program + ' Program' +'</b><br />' + props.Site + '</b><br />' : 'Click');
 };  
 
 
