@@ -26,7 +26,11 @@ new L.esri.basemapLayer('ImageryLabels').addTo(map);
 // Edit to upload GeoJSON data file from your local directory
 $.getJSON("test-program-sites.geojson", function (data) {
  geoJsonLayer = L.geoJson(data, {
-    style: {color: '#42ff3f', weight:3, fillOpacity: 0},
+    style: {
+      color: '#42ff3f', 
+      weight:3, 
+      fillOpacity: 0
+    },
     onEachFeature: onEachFeature
   }).addTo(map);
 controlLayers.addOverlay(geoJsonLayer, 'Programs');
@@ -47,10 +51,14 @@ function highlightFeature(e) {
 }
 
 // // This resets the highlight after hover moves away
-// function resetHighlight(e) {
-//   geoJsonLayer.setStyle(style);
-//   info.update();
-// }
+function resetHighlight(e) {
+  geoJsonLayer.setStyle({
+     color: '#42ff3f', 
+      weight:3, 
+      fillOpacity: 0
+  });
+  info.update();
+}
 
 function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
@@ -60,7 +68,7 @@ function zoomToFeature(e) {
 function onEachFeature(feature, layer) {
   layer.on({
     mouseover: highlightFeature,
-    //mouseout: resetHighlight,
+    mouseout: resetHighlight,
     click: highlightFeature,
     click: zoomToFeature
   });
