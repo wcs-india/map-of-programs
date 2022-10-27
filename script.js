@@ -29,11 +29,24 @@ $.getJSON("test-program-sites.geojson", function (data) {
     },
     onEachFeature: onEachFeature
   }).addTo(map);
-controlLayers.addOverlay(geoJsonLayer, 'Programs');
+controlLayers.addOverlay(geoJsonLayer, 'Marine Program');
 
 });
 
+// Edit to upload GeoJSON data file from your local directory
+$.getJSON("test-program-sites.geojson", function (data) {
+ geoJsonLayer = L.geoJson(data, {
+  return (feature.properties.Program === "Great Indian Bustard"),
+    style: {
+      color: '#42ff3f', 
+      weight:4, 
+      fillOpacity: 0
+    },
+    onEachFeature: onEachFeature
+  }).addTo(map);
+controlLayers.addOverlay(geoJsonLayer, 'Great Indian Bustard Program');
 
+});
 
 
 
@@ -44,7 +57,7 @@ function highlightFeature(e) {
   layer.setStyle({
     weight: 4,
     color: 'red',
-    fillOpacity: 0.5
+    fillOpacity: 0.2
   });
   info.update(layer.feature.properties);
 }
@@ -67,7 +80,7 @@ function zoomToFeature(e) {
 function onEachFeature(feature, layer) {
   layer.on({
     mouseover: highlightFeature,
-    mouseout: highlightFeature,
+    mouseout: resethighlight,
     click: highlightFeature,
     click: zoomToFeature
   });
