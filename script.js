@@ -26,7 +26,7 @@ new L.esri.basemapLayer('ImageryLabels').addTo(map);
 // Edit to upload GeoJSON data file from your local directory
 $.getJSON("test-program-sites.geojson", function (data) {
  geoJsonLayer = L.geoJson(data, {
-    style: {color: '#42ff3f', weight:1, fillOpacity: 0},
+    style: {color: '#42ff3f', weight:3, fillOpacity: 0},
     onEachFeature: onEachFeature
   }).addTo(map);
 controlLayers.addOverlay(geoJsonLayer, 'Programs');
@@ -41,16 +41,16 @@ function highlightFeature(e) {
   layer.setStyle({
     weight: 4,
     color: 'red',
-    fillOpacity: 0
+    fillOpacity: 0.5
   });
   info.update(layer.feature.properties);
 }
 
-// This resets the highlight after hover moves away
-function resetHighlight(e) {
-  geoJsonLayer.setStyle(style);
-  info.update();
-}
+// // This resets the highlight after hover moves away
+// function resetHighlight(e) {
+//   geoJsonLayer.setStyle(style);
+//   info.update();
+// }
 
 function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
@@ -60,7 +60,7 @@ function zoomToFeature(e) {
 function onEachFeature(feature, layer) {
   layer.on({
     mouseover: highlightFeature,
-    mouseout: resetHighlight,
+    //mouseout: resetHighlight,
     click: highlightFeature,
     click: zoomToFeature
   });
@@ -83,30 +83,3 @@ info.update = function (props) {
 
 
 info.addTo(map);
-
-
-// Use in info.update if GeoJSON data contains null values, and if so, displays "--"
-function checkNull(val) {
-  if (val != null || val == "NaN") {
-    return comma(val);
-  } else {
-    return "--";
-  }
-}
-
-// Use in info.update if GeoJSON data needs to be displayed as a percentage
-function checkThePct(a,b) {
-  if (a != null && b != null) {
-    return Math.round(a/b*1000)/10 + "%";
-  } else {
-    return "--";
-  }
-}
-
-// Use in info.update if GeoJSON data needs to be displayed with commas (such as 123,456)
-function comma(val){
-  while (/(\d+)(\d{3})/.test(val.toString())){
-    val = val.toString().replace(/(\d+)(\d{3})/, '$1'+','+'$2');
-  }
-  return val;
-}
