@@ -28,7 +28,7 @@ $.getJSON("test-program-sites.geojson", function (data) {
     },
     onEachFeature: onEachFeature
   }).addTo(map);
-controlLayers.addOverlay(geoJsonLayer, 'Programs');
+controlLayers.addOverlay(geoJsonLayer, '<b>PROGRAMS</b>');
 
 });
 
@@ -64,8 +64,8 @@ function zoomToFeature(e) {
 // This instructs highlight and reset functions on hover movement
 function onEachFeature(feature, layer) {
   layer.on({
-    //mouseover: highlightFeature,
-    mouseout: highlightFeature,
+    mouseover: highlightFeature,
+    //mouseout: highlightFeature,
     click: highlightFeature,
     click: zoomToFeature
   });
@@ -82,7 +82,7 @@ info.onAdd = function (map) {
 
 // Edit info box text and variables (such as elderly density 2014) to match those in your GeoJSON data
 info.update = function (props) {
-  this._div.innerHTML = '<h4>PROGRAMS OF WCS-INDIA<br />Project Sites</h4>' +  (props ?
+  this._div.innerHTML = '<h4>PROGRAMS OF WCS-INDIA<br />PROJECT SITES</h4>' +  (props ?
     '<b>' + props.Program + ' Program' +'</b><br />' + props.Site + '</b><br />' + props.image +'</b><br />' + props.description + '</b><br />' : 'Click on feature to know more');
 };  
 
