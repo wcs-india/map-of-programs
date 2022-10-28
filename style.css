@@ -2,12 +2,14 @@ body { margin:0; padding:0; }
 #map { position: absolute; top:0; bottom:0; right:0; left:0; }
 .info {
   padding: 6px 8px;
-  font: 14px/16px Arial, Helvetica;
-  background: white;
-  background: rgba(226,226,226,1);
+  background: #88a;
+  color: #fff;
+  font-family: Avenir, Calibri, sans-serif;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
+  position: absolute;
   height: 100%;
+  width: 30%;
   display: flex;
   flex-direction: column;
 
