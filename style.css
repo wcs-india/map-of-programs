@@ -2,13 +2,11 @@ body { margin:0; padding:0; }
 #map { position: absolute; top:0; bottom:0; right:0; left:0; }
 .info {
   padding: 6px 8px;
-  background: rgba(0,0,0,0.8);
-  color: black;
+ background: white;
+  background: rgba(226,226,226,0.8);
   font-family: 16px/22px Avenir, Calibri, sans-serif;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
-  height: 80%;
-  width: 30%;
  position: absolute;
 overflow-y: scroll;
 
