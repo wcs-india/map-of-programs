@@ -8,8 +8,7 @@ body { margin:0; padding:0; }
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
   position: relative;
-  top: 8px;
-  right: 16px;
+  left: 200px;
 }
 .info h4 {
   margin: 0 0 5px;
@@ -35,5 +34,5 @@ body { margin:0; padding:0; }
   margin-left: 3px;
   margin-bottom: 2px;
   opacity: 0; 
-  font: 20px/16px Arial, Helvetica;
+  font: 20px Helvetica;
 }
