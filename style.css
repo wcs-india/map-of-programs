@@ -4,10 +4,10 @@ body { margin:0; padding:0; }
   padding: 6px 8px;
   font: 14px/16px Arial, Helvetica, sans-serif;
   background: white;
-  background: rgba(226,226,226,0.9);
+  background: rgba(226,226,226,1);
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
-  position: relative;
+  position: absolute;
   top: 8px;
   right: 16px;
 }
