@@ -1,8 +1,8 @@
 // Edit the center point and zoom level
 var map = L.map('map', {
   center: [17.876475, 77.379697],
-  zoom: 5  ,
-  minZoom : 2,
+  zoom: 8  ,
+  minZoom : 5,
   scrollWheelZoom: true
 });
 
