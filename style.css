@@ -2,14 +2,13 @@ body { margin:0; padding:0; }
 #map { position: absolute; top:0; bottom:0; right:0; left:0; }
 .info {
   padding: 6px 8px;
-  background: #88a;
-  color: #fff;
+  background: #88a, 0.8;
+  color: black;
   font-family: Avenir, Calibri, sans-serif;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 5px;
   height: 100%;
-  display: flex;
-  flex-direction: column;
+  width: 30%;
 
 }
 .info h4 {
