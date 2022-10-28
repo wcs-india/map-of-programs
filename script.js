@@ -64,7 +64,7 @@ function zoomToFeature(e) {
 // This instructs highlight and reset functions on hover movement
 function onEachFeature(feature, layer) {
   layer.on({
-    mouseover: highlightFeature,
+    //mouseover: highlightFeature,
     mouseout: highlightFeature,
     click: highlightFeature,
     click: zoomToFeature
