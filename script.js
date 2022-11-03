@@ -20,7 +20,7 @@ const map = L.map("map", config).setView([lat, lng], zoom);
 // layer controls
 var controlLayers = L.control.layers( null, null, {
      position:"topleft",
-     collapsed: true // truw = closed by default
+     collapsed: false // truw = closed by default
     }).addTo(map);
 
 // Used to load and display tile layers on the map
@@ -62,10 +62,9 @@ const marker = L.marker([50.0616, 19.9373])
   $.getJSON("great-indian-bustard-sites.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
     style: {color: 'white', weight:1.5},
-    
-  })addTo(map);
-  //.bindPopup(customPopup, customOptions).on("click", runTabs);
-
+    onEachFeature: onEachFeature    
+  }).bindPopup(customPopup, customOptions)
+  .on("click", runTabs).addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD</b>');
 });
 
