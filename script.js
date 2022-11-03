@@ -25,167 +25,167 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
-// ------------------------------------------------------------
-// async function to get data from json
-async function fetchData(url) {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    console.error(err);
-  }
-}
+// // ------------------------------------------------------------
+// // async function to get data from json
+// async function fetchData(url) {
+//   try {
+//     const response = await fetch(url);
+//     const data = await response.json();
+//     return data;
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
 
-// --------------------------------------------------
-// button to close sidebar
-const buttonClose = document.querySelector(".close-button");
+// // --------------------------------------------------
+// // button to close sidebar
+// const buttonClose = document.querySelector(".close-button");
 
-let featureGroups = [];
-let groupBounds;
-let latlngs = [];
+// let featureGroups = [];
+// let groupBounds;
+// let latlngs = [];
 
-// function to add markers to map
-fetchData("./great-indian-bustard-sites.geojson")
-  .then((data) => {
-    // create markers width "marker-options-id"
-    data.map((polygon) => {
-      featureGroups.push(
-        L.multiPolygon(polygon.geometry.coordinates, {
-          icon: L.divIcon({
-            className: "leaflet-marker-icon",
-            html: `${polygon.Program}`,
-            iconSize: L.point(30, 30),
-            popupAnchor: [3, -5],
-          }),
-          "marker-options-id": polygon.fid
-        })
-      );
-      latlngs.push(polygon.geometry.coordinates);
-    });
+// // function to add markers to map
+// fetchData("great-indian-bustard-sites.geojson")
+//   .then((data) => {
+//     // create markers width "marker-options-id"
+//     data.map((polygon) => {
+//       featureGroups.push(
+//         L.multiPolygon(polygon.geometry.coordinates, {
+//           style: L.multiPolygon({
+//             className: "leaflet-marker-icon",
+//             html: `${polygon.Program}`,
+//             iconSize: L.point(30, 30),
+//             popupAnchor: [3, -5],
+//           }),
+//           "marker-options-id": polygon.fid
+//         })
+//       );
+//       latlngs.push(polygon.geometry.coordinates);
+//     });
 
-        return data;
-  })
-  .then((data) => {
-    // create feature group
-    // add markers to map
-    featureGroups.map((polygon) => {
-      polygon.addTo(map);
-    });
+//         return data;
+//   })
+//   .then((data) => {
+//     // create feature group
+//     // add markers to map
+//     featureGroups.map((polygon) => {
+//       polygon.addTo(map);
+//     });
 
-    // create feature group with markers
-    groupBounds = new L.featureGroup(featureGroups);
+//     // create feature group with markers
+//     groupBounds = new L.featureGroup(featureGroups);
 
-    // fitBounds of feature group to map
-    map.fitBounds(groupBounds.getBounds(), {
-      padding: [50, 50],
-    });
+//     // fitBounds of feature group to map
+//     map.fitBounds(groupBounds.getBounds(), {
+//       padding: [50, 50],
+//     });
 
-    // add event listener to markers to open sidebar
-    groupBounds.on("click", function (e) {
-      if (e.layer instanceof L.multiPolygon) {
-        showSidebarWidthText(e.layer.options["marker-options-id"]);
-      }
-    });
+//     // add event listener to markers to open sidebar
+//     groupBounds.on("click", function (e) {
+//       if (e.layer instanceof L.multiPolygon) {
+//         showSidebarWidthText(e.layer.options["marker-options-id"]);
+//       }
+//     });
 
-    // add comment to sodebar depending on marker id
-    function showSidebarWidthText(id) {
-      data.filter((polygon) => {
-        if (polygon.fid === id) {
-          document.body.classList.add("active-sidebar");
-          addContentToSidebar(marker);
-        }
-      });
-    }
-  });
+//     // add comment to sodebar depending on marker id
+//     function showSidebarWidthText(id) {
+//       data.filter((polygon) => {
+//         if (polygon.fid === id) {
+//           document.body.classList.add("active-sidebar");
+//           addContentToSidebar(marker);
+//         }
+//       });
+//     }
+//   });
 
-// --------------------------------------------------
-// close when click esc
-document.addEventListener("keydown", function (event) {
-  // close sidebar when press esc
-  if (event.key === "Escape") {
-    closeSidebar();
-  }
-});
-
-// close sidebar when click on close button
-buttonClose.addEventListener("click", () => {
-  // close sidebar when click on close button
-  closeSidebar();
-});
-
-// close sidebar when click outside
-// document.addEventListener("click", (e) => {
-//   const target = e.target;
-//   if (
-//     !target.closest(".sidebar") &&
-//     !target.classList.contains("leaflet-marker-icon")
-//   ) {
+// // --------------------------------------------------
+// // close when click esc
+// document.addEventListener("keydown", function (event) {
+//   // close sidebar when press esc
+//   if (event.key === "Escape") {
 //     closeSidebar();
 //   }
 // });
 
-// --------------------------------------------------
-// close sidebar
+// // close sidebar when click on close button
+// buttonClose.addEventListener("click", () => {
+//   // close sidebar when click on close button
+//   closeSidebar();
+// });
 
-function closeSidebar() {
-  // remove class active-sidebar
-  document.body.classList.remove("active-sidebar");
+// // close sidebar when click outside
+// // document.addEventListener("click", (e) => {
+// //   const target = e.target;
+// //   if (
+// //     !target.closest(".sidebar") &&
+// //     !target.classList.contains("leaflet-marker-icon")
+// //   ) {
+// //     closeSidebar();
+// //   }
+// // });
 
-  // bounds map to default
-  boundsMap();
-}
+// // --------------------------------------------------
+// // close sidebar
 
-// --------------------------------------------------
-// add content to sidebar
+// function closeSidebar() {
+//   // remove class active-sidebar
+//   document.body.classList.remove("active-sidebar");
 
-function addContentToSidebar(polygon) {
-  const { fid, Program, small, description, img, coordinates } = polygon;
-  const smallInfo = small !== undefined ? `<small>${small}</small>` : "";
+//   // bounds map to default
+//   boundsMap();
+// }
 
-  // create sidebar content
-  const sidebarTemplate = `
-    <article class="sidebar-content">
-      <h1>${Program}</h1>
-      <div class="marker-id">${fid}</div>
-      <div class="info-content">
-        <img class="img-zoom" src="${img}">
-        ${smallInfo}
-        <div class="info-description">${description}</div>
-      </div>
-    </article>
-  `;
+// // --------------------------------------------------
+// // add content to sidebar
 
-  const sidebar = document.querySelector(".sidebar");
-  const sidebarContent = document.querySelector(".sidebar-content");
+// function addContentToSidebar(polygon) {
+//   const { fid, Program, small, description, img, coordinates } = polygon;
+//   const smallInfo = small !== undefined ? `<small>${small}</small>` : "";
 
-  // always remove content before adding new one
-  sidebarContent?.remove();
+//   // create sidebar content
+//   const sidebarTemplate = `
+//     <article class="sidebar-content">
+//       <h1>${Program}</h1>
+//       <div class="marker-id">${fid}</div>
+//       <div class="info-content">
+//         <img class="img-zoom" src="${img}">
+//         ${smallInfo}
+//         <div class="info-description">${description}</div>
+//       </div>
+//     </article>
+//   `;
 
-  // add content to sidebar
-  sidebar.insertAdjacentHTML("beforeend", sidebarTemplate);
+//   const sidebar = document.querySelector(".sidebar");
+//   const sidebarContent = document.querySelector(".sidebar-content");
 
-  // set bounds depending on marker geometry
-  boundsMap(coordinates);
-}
+//   // always remove content before adding new one
+//   sidebarContent?.remove();
 
-// --------------------------------------------------
-// bounds map when sidebar is open
-function boundsMap(geometry) {
-  const sidebar = document.querySelector(".sidebar").offsetWidth;
+//   // add content to sidebar
+//   sidebar.insertAdjacentHTML("beforeend", sidebarTemplate);
 
-  const polygon = L.multiPolygon(coordinates);
-  const group = L.featureGroup([polygon]);
+//   // set bounds depending on marker geometry
+//   boundsMap(coordinates);
+// }
 
-  // bounds depending on whether we have a marker or not
-  const bounds = coordinates ? group.getBounds() : groupBounds.getBounds();
+// // --------------------------------------------------
+// // bounds map when sidebar is open
+// function boundsMap(geometry) {
+//   const sidebar = document.querySelector(".sidebar").offsetWidth;
 
-  // set bounds of map depending on sidebar
-  // width and feature group bounds
-  map.fitBounds(bounds, {
-    paddingTopLeft: [coordinates ? sidebar : 0, 10],
-  });
-}
+//   const polygon = L.multiPolygon(coordinates);
+//   const group = L.featureGroup([polygon]);
+
+//   // bounds depending on whether we have a marker or not
+//   const bounds = coordinates ? group.getBounds() : groupBounds.getBounds();
+
+//   // set bounds of map depending on sidebar
+//   // width and feature group bounds
+//   map.fitBounds(bounds, {
+//     paddingTopLeft: [coordinates ? sidebar : 0, 10],
+//   });
+// }
 
 //--------------------------------------------------------
 
