@@ -35,7 +35,7 @@ function highlightFeature(e) {
     color: '#42ff3f',
     fillOpacity: 0
   });
-  info.update(layer.properties.Program);
+  info.update(layer.feature.properties);
 }
 
 // This resets the highlight after hover moves away
@@ -68,9 +68,9 @@ info.onAdd = function (map) {
 };
 
 // Edit info box text and variables to match those in your GeoJSON data
-info.update = function (props) {
-  this._div.innerHTML = '<h4>Circle Name <h4>' +  (props ?
-    '<b>' + props.Program + ' ' + '</b><br /><b>' + props.description + '</b><br />' 
+info.update = function (properties) {
+  this._div.innerHTML = '<h4>Circle Name <h4>' +  (properties ?
+    '<b>' + properties.Program + ' ' + '</b><br /><b>' + properties.description + '</b><br />' 
     : 'Click on a Circle');
 };  
 
@@ -81,7 +81,7 @@ info.addTo(map);
 
 // adding geojson by fetch
 // of course you can use jquery, axios etc.
-fetch("../static/wojewodztwa-medium.geojson")
+fetch("great-indian-bustard-sites.geojson")
   .then(function (response) {
     return response.json();
   })
