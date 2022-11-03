@@ -63,13 +63,14 @@ const marker = L.marker([50.0616, 19.9373])
   geoJsonLayer = L.geoJson(data, {
     style: {color: 'white', weight:1.5},
     
-  }).bindPopup(customPopup, customOptions).on("click", runTabs);
+  })addTo(map);
+  //.bindPopup(customPopup, customOptions).on("click", runTabs);
 
 controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD</b>');
 });
 
 
-geoJsonLayer.addTo(map);
+
 
 // center map when click on marker
 function runTabs() {
