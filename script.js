@@ -28,21 +28,6 @@ const customOptions = {
   keepInView: true, // Set it to true if you want to prevent users from panning the popup off of the screen while it is open.
 };
 
-const funny = L.icon({
-  iconUrl: "http://grzegorztomicki.pl/serwisy/pin.png",
-  iconSize: [50, 58], // size of the icon
-  iconAnchor: [20, 58], // changed marker icon position
-  popupAnchor: [0, -60], // changed popup position
-});
-
-// create marker object, pass custom icon as option, pass content and options to popup, add to map
-L.marker([50.0616, 19.9373], {
-  icon: funny,
-})
-  .bindPopup(customPopup, customOptions)
-  .on("click", clickZoom)
-  .addTo(map);
-
 // center map when click on marker
 function clickZoom(e) {
   map.setView(e.target.getLatLng(), zoom);
@@ -53,7 +38,7 @@ $.getJSON("great-indian-bustard-sites.geojson", function (data) {
     style: {color: '#42ff3f', weight:1, fillOpacity: 1},
         onEachFeature: onEachFeature
   })
-.bindPopup('One')
+.bindPopup('<div class="customPopup"><figure><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/A-10_Sukiennice_w_Krakowie_Krak%C3%B3w%2C_Rynek_G%C5%82%C3%B3wny_MM.jpg/1920px-A-10_Sukiennice_w_Krakowie_Krak%C3%B3w%2C_Rynek_G%C5%82%C3%B3wny_MM.jpg"><figcaption>Source: wikipedia.org</figcaption></figure><div>Kraków,[a] also written in English as Krakow and traditionally known as Cracow, is the second-largest and one of the oldest cities in Poland. Situated on the Vistula River in Lesser Poland Voivodeship... <a href="https://en.wikipedia.org/wiki/Krak%C3%B3w" target="_blank">→ show more</a></div></div>')
 .addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD VILLAGES</b>');
 });
@@ -62,7 +47,9 @@ $.getJSON("counter-wildlife-trafficking-sites.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
     style: {color: '#42ff3f', weight:1, fillOpacity: 1},
         onEachFeature: onEachFeature
-  }).addTo(map);
+  })
+.bindPopup(layer.feature.properties.description)
+.addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>COUNTER WILDLIFE TRAFFICKING WORKSHOPS</b>');
 });
 
