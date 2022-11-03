@@ -54,11 +54,11 @@ fetchData("great-indian-bustard-sites.geojson")
         L.polygon(polygon.coordinates, {
           icon: L.divIcon({
             className: "leaflet-marker-icon",
-            html: `${polygon.properties.Program}`,
+            html: `${polygon.Program}`,
             iconSize: L.point(30, 30),
             popupAnchor: [3, -5],
           }),
-          "marker-options-id": marker.fid,
+          "marker-options-id": polygon.fid
         })
       );
       latlngs.push(polygon.coordinates);
