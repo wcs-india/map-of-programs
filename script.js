@@ -145,17 +145,15 @@ function closeSidebar() {
 // add content to sidebar
 
 function addContentToSidebar(marker) {
-  const { fid, Program, small, description, img, geometry } = marker;
-  const smallInfo = small !== undefined ? `<small>${small}</small>` : "";
-
-  // create sidebar content
+  const { fid, Program, description, img, geometry } = marker;
+  
+    // create sidebar content
   const sidebarTemplate = `
     <article class="sidebar-content">
       <h1>${Program}</h1>
       <div class="marker-id">${fid}</div>
       <div class="info-content">
         <img class="img-zoom" src="${img}" >
-        ${smallInfo}
         <div class="info-description">${description}</div>
       </div>
     </article>
