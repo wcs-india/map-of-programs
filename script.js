@@ -141,7 +141,7 @@ function closeSidebar() {
 // add content to sidebar
 
 function addContentToSidebar(marker) {
-  const { fid, Program, small, description, img, coordinates } = marker;
+  const { fid, Program, small, description, img, coordinates  } = marker;
   const smallInfo = small !== undefined ? `<small>${small}</small>` : "";
 
   // create sidebar content
@@ -167,7 +167,7 @@ function addContentToSidebar(marker) {
   sidebar.insertAdjacentHTML("beforeend", sidebarTemplate);
 
   // set bounds depending on marker coords
-  boundsMap(coordinates);
+  boundsMap(geometry.coordinates);
 }
 
 // --------------------------------------------------
@@ -175,16 +175,16 @@ function addContentToSidebar(marker) {
 function boundsMap(coordinates) {
   const sidebar = document.querySelector(".sidebar").offsetWidth;
 
-  const marker = L.marker(coordinates);
+  const marker = L.marker(geometry.coordinates);
   const group = L.featureGroup([marker]);
 
   // bounds depending on whether we have a marker or not
-  const bounds = coordinates ? group.getBounds() : groupBounds.getBounds();
+  const bounds = geometry.coordinates  ? group.getBounds() : groupBounds.getBounds();
 
   // set bounds of map depending on sidebar
   // width and feature group bounds
   map.fitBounds(bounds, {
-    paddingTopLeft: [coordinates ? sidebar : 0, 10],
+    paddingTopLeft: [geometry.coordinates  ? sidebar : 0, 10],
   });
 }
 //--------------------------------------------------------
