@@ -30,7 +30,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 async function fetchData(url) {
   try {
     const response = await fetch(url);
-    const data = await response.geojson();
+    const data = await response.json();
     return data;
   } catch (err) {
     console.error(err);
@@ -46,7 +46,7 @@ let groupBounds;
 let latlngs = [];
 
 // function to add markers to map
-fetchData("great-indian-bustard-sites.geojson")
+fetchData("./great-indian-bustard-sites.geojson")
   .then((data) => {
     // create markers width "marker-options-id"
     data.map((polygon) => {
