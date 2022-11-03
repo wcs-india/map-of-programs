@@ -64,8 +64,12 @@ fetchData("counter-wildlife-trafficking-sites.geojson")
       );
       latlngs.push(marker.coordinates);
     });
+    L.polyline(latlngs, {
+      color: "#ff3939",
+      weight: 2,
+    }).addTo(map);
 
-        return data;
+    return data;
   })
   .then((data) => {
     // create feature group
@@ -141,7 +145,7 @@ function closeSidebar() {
 // add content to sidebar
 
 function addContentToSidebar(marker) {
-  const { fid, Program, small, description, img, coordinates  } = marker;
+  const { fid, Program, small, description, img, geometry } = marker;
   const smallInfo = small !== undefined ? `<small>${small}</small>` : "";
 
   // create sidebar content
@@ -172,7 +176,7 @@ function addContentToSidebar(marker) {
 
 // --------------------------------------------------
 // bounds map when sidebar is open
-function boundsMap(coordinates) {
+function boundsMap(geometry) {
   const sidebar = document.querySelector(".sidebar").offsetWidth;
 
   const marker = L.marker(geometry.coordinates);
@@ -190,91 +194,91 @@ function boundsMap(coordinates) {
 //--------------------------------------------------------
 
 
-const CWT = new L.getJSON("counter-wildlife-trafficking-sites.geojson", function (data) {
-  geoJsonLayer = L.geoJson(data, {
-    style: {color: 'white', weight:1.5},
+// const CWT = new L.getJSON("counter-wildlife-trafficking-sites.geojson", function (data) {
+//   geoJsonLayer = L.geoJson(data, {
+//     style: {color: 'white', weight:1.5},
     
-  }).addTo(map);
-});
+//   }).addTo(map);
+// });
 
-const GIB = new L.getJSON("great-indian-bustard-sites.geojson", function (data) {
-  geoJsonLayer = L.geoJson(data, {
-    style: {color: 'white', weight:1.5},
+// const GIB = new L.getJSON("great-indian-bustard-sites.geojson", function (data) {
+//   geoJsonLayer = L.geoJson(data, {
+//     style: {color: 'white', weight:1.5},
     
-  }).addTo(map);
-});
+//   }).addTo(map);
+// });
 
 
-// Extended `LayerGroup` that makes it easy
-// to do the same for all layers of its members
-const cwt = new L.FeatureGroup();
-const gib = new L.FeatureGroup();
+// // Extended `LayerGroup` that makes it easy
+// // to do the same for all layers of its members
+// const cwt = new L.FeatureGroup();
+// const gib = new L.FeatureGroup();
 
-// adding polugons to the map
-cwt.addLayer(CWT);
-gib.addLayer(GIB);
+// // adding polugons to the map
+// cwt.addLayer(CWT);
+// gib.addLayer(GIB);
 
-// object with layers
-const overlayMaps = {
-  CWT: cwt,
-  GIB: gib,
-};
+// // object with layers
+// const overlayMaps = {
+//   CWT: cwt,
+//   GIB: gib,
+// };
 
-// centering a group of markers
-map.on("layeradd", function () {
-  // Create new empty bounds
-  let bounds = new L.LatLngBounds();
-  map.eachLayer(function (layer) {
-    // Check if layer is a featuregroup
-    if (layer instanceof L.FeatureGroup) {
-      // Extend bounds with group's bounds
-      bounds.extend(layer.getBounds());
-    }
-  });
+// // centering a group of markers
+// map.on("layeradd", function () {
+//   // Create new empty bounds
+//   let bounds = new L.LatLngBounds();
+//   map.eachLayer(function (layer) {
+//     // Check if layer is a featuregroup
+//     if (layer instanceof L.FeatureGroup) {
+//       // Extend bounds with group's bounds
+//       bounds.extend(layer.getBounds());
+//     }
+//   });
 
-  // Check if bounds are valid (could be empty)
-  if (bounds.isValid()) {
-    // Valid, fit bounds
-    map.flyToBounds(bounds);
-  } else {
-    // Invalid, fit world
-    // map.fitWorld();
-  }
-});
+//   // Check if bounds are valid (could be empty)
+//   if (bounds.isValid()) {
+//     // Valid, fit bounds
+//     map.flyToBounds(bounds);
+//   } else {
+//     // Invalid, fit world
+//     // map.fitWorld();
+//   }
+// });
 
-L.Control.CustomButtons = L.Control.Layers.extend({
-  onAdd: function () {
-    this._initLayout();
-    this._removePolygons();
-    this._update();
-    return this._container;
-  },
-  _removePolygons: function () {
-    this.createButton("remove", "Remove all polygons");
-  },
-  createButton: function (type, Program) {
-    const elements = this._container.getElementsByClassName(
-      "leaflet-control-layers-list"
-    );
-    const button = L.DomUtil.create(
-      "button",
-      `btn-markers ${Program}`,
-      elements[0]
-    );
-    button.textContent = Program;
+// L.Control.CustomButtons = L.Control.Layers.extend({
+//   onAdd: function () {
+//     this._initLayout();
+//     this._removePolygons();
+//     this._update();
+//     return this._container;
+//   },
+//   _removePolygons: function () {
+//     this.createButton("remove", "Remove all polygons");
+//   },
+//   createButton: function (type, Program) {
+//     const elements = this._container.getElementsByClassName(
+//       "leaflet-control-layers-list"
+//     );
+//     const button = L.DomUtil.create(
+//       "button",
+//       `btn-markers ${Program}`,
+//       elements[0]
+//     );
+//     button.textContent = Program;
 
-    L.DomEvent.on(button, "click", function (e) {
-      const checkbox = document.querySelectorAll(
-        ".leaflet-control-layers-overlays input[type=checkbox]"
-      );
+//     L.DomEvent.on(button, "click", function (e) {
+//       const checkbox = document.querySelectorAll(
+//         ".leaflet-control-layers-overlays input[type=checkbox]"
+//       );
 
-      // Remove/add all layer from map when click on button
-      [].slice.call(checkbox).map((el) => {
-        el.checked = type === "add" ? false : true;
-        el.click();
-      });
-    });
-  },
-});
+//       // Remove/add all layer from map when click on button
+//       [].slice.call(checkbox).map((el) => {
+//         el.checked = type === "add" ? false : true;
+//         el.click();
+//       });
+//     });
+//   },
+// });
 
-new L.Control.CustomButtons(null, overlayMaps, { collapsed: false }).addTo(map);
+// new L.Control.CustomButtons(null, overlayMaps, { collapsed: false }).addTo(map);
