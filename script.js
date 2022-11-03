@@ -51,7 +51,7 @@ fetchData("great-indian-bustard-sites.geojson")
     // create markers width "marker-options-id"
     data.map((polygon) => {
       featureGroups.push(
-        L.polygon(polygon.coordinates, {
+        L.multiPolygon(polygon.coordinates, {
           icon: L.divIcon({
             className: "leaflet-marker-icon",
             html: `${polygon.Program}`,
@@ -83,7 +83,7 @@ fetchData("great-indian-bustard-sites.geojson")
 
     // add event listener to markers to open sidebar
     groupBounds.on("click", function (e) {
-      if (e.layer instanceof L.Polygon) {
+      if (e.layer instanceof L.multiPolygon) {
         showSidebarWidthText(e.layer.options["marker-options-id"]);
       }
     });
@@ -174,7 +174,7 @@ function addContentToSidebar(polygon) {
 function boundsMap(geometry) {
   const sidebar = document.querySelector(".sidebar").offsetWidth;
 
-  const polygon = L.polygon(coordinates);
+  const polygon = L.multiPolygon(coordinates);
   const group = L.featureGroup([polygon]);
 
   // bounds depending on whether we have a marker or not
