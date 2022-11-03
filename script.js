@@ -17,11 +17,11 @@ const lng = 79;
 // calling map
 const map = L.map("map", config).setView([lat, lng], zoom);
 
-// layer controls
-var controlLayers = L.control.layers( null, null, {
-     position:"topleft",
-     collapsed: false // truw = closed by default
-    }).addTo(map);
+// // layer controls
+// var controlLayers = L.control.layers( null, null, {
+//      position:"topleft",
+//      collapsed: false // truw = closed by default
+//     }).addTo(map);
 
 // Used to load and display tile layers on the map
 // Most tile servers require attribution, which you can set under `Layer`
@@ -60,12 +60,10 @@ const marker = L.marker([50.0616, 19.9373])
   marker.addTo(map)
 
   $.getJSON("great-indian-bustard-sites.geojson", function (data) {
-  geoJsonLayer = L.geoJson(data, {
-    style: {color: 'white', weight:1.5},
+  GIBLAYER = L.geoJson(data, {
+    style: {color: '#42ff3f', weight:1, fillOpacity: 0},
     onEachFeature: onEachFeature    
-  }).bindPopup(customPopup, customOptions)
-  .on("click", runTabs).addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD</b>');
+  }).addTo(map);
 });
 
 
@@ -75,3 +73,73 @@ controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD</b>');
 function runTabs() {
   const tabs = new Tabby("[data-tabs]");
 }
+
+const gib = new L.FeatureGroup();
+
+// adding polugons to the map
+gib.addLayer(GIBLAYER);
+
+// object with layers
+const overlayMaps = {
+  GIBLAYER: gib,
+};
+
+
+// centering a group of markers
+map.on("layeradd", function () {
+  // Create new empty bounds
+  let bounds = new L.LatLngBounds();
+  map.eachLayer(function (layer) {
+    // Check if layer is a featuregroup
+    if (layer instanceof L.FeatureGroup) {
+      // Extend bounds with group's bounds
+      bounds.extend(layer.getBounds());
+    }
+  });
+
+  // Check if bounds are valid (could be empty)
+  if (bounds.isValid()) {
+    // Valid, fit bounds
+    map.flyToBounds(bounds);
+  } else {
+    // Invalid, fit world
+    // map.fitWorld();
+  }
+});
+
+L.Control.CustomButtons = L.Control.Layers.extend({
+  onAdd: function () {
+    this._initLayout();
+    this._removePolygons();
+    this._update();
+    return this._container;
+  },
+  _removePolygons: function () {
+    this.createButton("remove", "Remove all polygons");
+  },
+  createButton: function (type, Program) {
+    const elements = this._container.getElementsByClassName(
+      "leaflet-control-layers-list"
+    );
+    const button = L.DomUtil.create(
+      "button",
+      `btn-markers ${Program}`,
+      elements[0]
+    );
+    button.textContent = Program;
+
+    L.DomEvent.on(button, "click", function (e) {
+      const checkbox = document.querySelectorAll(
+        ".leaflet-control-layers-overlays input[type=checkbox]"
+      );
+
+      // Remove/add all layer from map when click on button
+      [].slice.call(checkbox).map((el) => {
+        el.checked = type === "add" ? false : true;
+        el.click();
+      });
+    });
+  },
+});
+
+new L.Control.CustomButtons(null, overlayMaps, { collapsed: false }).addTo(map);
