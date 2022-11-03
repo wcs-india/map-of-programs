@@ -12,24 +12,15 @@ var controlLayers = L.control.layers( null, null, {
      collapsed: false // truw = closed by default
     }).addTo(map);
 
-// new L.tileLayer('https://{s}.tile.thunderforest.com/mobile-atlas/{z}/{x}/{y}.png', {
-//   attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-//   ,var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
-//         attribution: '©OpenStreetMap, ©CartoDB'
-// }).addTo(map);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
 
-
-// Edit links to your GitHub repo and data source credit
-map.attributionControl.addAttribution('View <a href="https://gitlab.com/monsoonforest/nasa-landslide-nowcast">open-source code on GitLab</a>');
-map.attributionControl.addAttribution('Landslide Nowcast &copy; <a href="https://gpm.nasa.gov/data/visualizations/precip-apps">NASA GPM </a>');
-
-
-new L.esri.basemapLayer('Imagery').addTo(map);
-new L.esri.basemapLayer('ImageryLabels').addTo(map);
 
 $.getJSON("great-indian-bustard-sites.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#42ff3f', weight:1, fillOpacity: 0},
+    style: {color: '#42ff3f', weight:1, fillOpacity: 1},
         onEachFeature: onEachFeature
   }).addTo(map);
   controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD</b>');
@@ -44,7 +35,7 @@ function highlightFeature(e) {
     color: '#42ff3f',
     fillOpacity: 0
   });
-  info.update(layer.feature.Program);
+  info.update(layer.properties.Program);
 }
 
 // This resets the highlight after hover moves away
@@ -85,3 +76,48 @@ info.update = function (props) {
 
 
 info.addTo(map);
+
+
+
+// adding geojson by fetch
+// of course you can use jquery, axios etc.
+fetch("../static/wojewodztwa-medium.geojson")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    let layer = new L.GeoJSON(data, {
+      // A Function that will be called once for each
+      // created Feature, after it has been created and styled
+      onEachFeature: function (feature, layer) {
+        layer.on("mouseover", function (e) {
+          // bindPopup
+          getVoivodeshipName(feature, layer);
+          // show voivodeship
+          addTextToDiv(feature.properties.nazwa);
+          this.openPopup();
+          // style
+          this.setStyle({
+            fillColor: "#eb4034",
+            weight: 2,
+            color: "#eb4034",
+            fillOpacity: 0.7,
+          });
+        });
+        layer.on("mouseout", function () {
+          this.closePopup();
+          // style
+          this.setStyle({
+            fillColor: "#3388ff",
+            weight: 2,
+            color: "#3388ff",
+            fillOpacity: 0.2,
+          });
+        });
+        layer.on("click", function () {
+          // adding the province name to the visible div
+          addTextToDiv(feature.properties.nazwa);
+        });
+      },
+    }).addTo(map);
+  });
