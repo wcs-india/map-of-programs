@@ -13,8 +13,8 @@ const zoom = 6;
 // co-ordinates
 
 
-const lat = 77.379697;
-const lng = 20.876475;
+const lat = 77;
+const lng = 20;
 
 // calling map
 const map = L.map("map", config).setView([lat, lng], zoom);
@@ -51,17 +51,17 @@ fetchData("great-indian-bustard-sites.geojson")
     // create markers width "marker-options-id"
     data.map((polygon) => {
       featureGroups.push(
-        L.polygon(polygon.geometry.coordinates, {
+        L.polygon(polygon.coordinates, {
           icon: L.divIcon({
             className: "leaflet-marker-icon",
-            html: `${polygon.fid}`,
+            html: `${polygon.properties.Program}`,
             iconSize: L.point(30, 30),
             popupAnchor: [3, -5],
           }),
           "marker-options-id": marker.fid,
         })
       );
-      latlngs.push(polygon.geometry.coordinates);
+      latlngs.push(polygon.coordinates);
     });
 
         return data;
@@ -140,7 +140,7 @@ function closeSidebar() {
 // add content to sidebar
 
 function addContentToSidebar(polygon) {
-  const { fid, Program, small, description, img, geometry } = polygon;
+  const { fid, Program, small, description, img, coordinates } = polygon;
   const smallInfo = small !== undefined ? `<small>${small}</small>` : "";
 
   // create sidebar content
@@ -166,7 +166,7 @@ function addContentToSidebar(polygon) {
   sidebar.insertAdjacentHTML("beforeend", sidebarTemplate);
 
   // set bounds depending on marker geometry
-  boundsMap(geometry.coordinates);
+  boundsMap(coordinates);
 }
 
 // --------------------------------------------------
@@ -174,15 +174,15 @@ function addContentToSidebar(polygon) {
 function boundsMap(geometry) {
   const sidebar = document.querySelector(".sidebar").offsetWidth;
 
-  const polygon = L.polygon(geometry.coordinates);
+  const polygon = L.polygon(coordinates);
   const group = L.featureGroup([polygon]);
 
   // bounds depending on whether we have a marker or not
-  const bounds = geometry.coordinates ? group.getBounds() : groupBounds.getBounds();
+  const bounds = coordinates ? group.getBounds() : groupBounds.getBounds();
 
   // set bounds of map depending on sidebar
   // width and feature group bounds
   map.fitBounds(bounds, {
-    paddingTopLeft: [geometry.coordinates ? sidebar : 0, 10],
+    paddingTopLeft: [coordinates ? sidebar : 0, 10],
   });
 }
