@@ -28,6 +28,13 @@ const customOptions = {
   keepInView: true, // Set it to true if you want to prevent users from panning the popup off of the screen while it is open.
 };
 
+const funny = L.icon({
+  iconUrl: "http://grzegorztomicki.pl/serwisy/pin.png",
+  iconSize: [50, 58], // size of the icon
+  iconAnchor: [20, 58], // changed marker icon position
+  popupAnchor: [0, -60], // changed popup position
+});
+
 // create marker object, pass custom icon as option, pass content and options to popup, add to map
 L.marker([50.0616, 19.9373], {
   icon: funny,
@@ -46,9 +53,9 @@ $.getJSON("great-indian-bustard-sites.geojson", function (data) {
     style: {color: '#42ff3f', weight:1, fillOpacity: 1},
         onEachFeature: onEachFeature
   })
-.bindPopup(customPopup, customOptions)
+.bindPopup('One')
 .addTo(map);
-  controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD VILLAGES</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD VILLAGES</b>');
 });
 
 $.getJSON("counter-wildlife-trafficking-sites.geojson", function (data) {
@@ -56,7 +63,7 @@ $.getJSON("counter-wildlife-trafficking-sites.geojson", function (data) {
     style: {color: '#42ff3f', weight:1, fillOpacity: 1},
         onEachFeature: onEachFeature
   }).addTo(map);
-  controlLayers.addOverlay(geoJsonLayer, '<b>COUNTER WILDLIFE TRAFFICKING WORKSHOPS</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>COUNTER WILDLIFE TRAFFICKING WORKSHOPS</b>');
 });
 
 
