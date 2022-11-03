@@ -49,7 +49,7 @@ fetchData("great-indian-bustard-sites.geojson")
     // create markers width "marker-options-id"
     data.map((marker) => {
       featureGroups.push(
-        L.marker(marker.geometry, {
+        L.marker(marker.geometry.coordinates, {
           icon: L.divIcon({
             className: "leaflet-marker-icon",
             html: `${marker.fid}`,
@@ -59,7 +59,7 @@ fetchData("great-indian-bustard-sites.geojson")
           "marker-options-id": marker.fid,
         })
       );
-      latlngs.push(marker.geometry);
+      latlngs.push(marker.geometry.coordinates);
     });
 
         return data;
@@ -164,7 +164,7 @@ function addContentToSidebar(marker) {
   sidebar.insertAdjacentHTML("beforeend", sidebarTemplate);
 
   // set bounds depending on marker geometry
-  boundsMap(geometry);
+  boundsMap(geometry.coordinates);
 }
 
 // --------------------------------------------------
@@ -172,15 +172,15 @@ function addContentToSidebar(marker) {
 function boundsMap(geometry) {
   const sidebar = document.querySelector(".sidebar").offsetWidth;
 
-  const marker = L.marker(geometry);
+  const marker = L.marker(geometry.coordinates);
   const group = L.featureGroup([marker]);
 
   // bounds depending on whether we have a marker or not
-  const bounds = geometry ? group.getBounds() : groupBounds.getBounds();
+  const bounds = geometry.coordinates ? group.getBounds() : groupBounds.getBounds();
 
   // set bounds of map depending on sidebar
   // width and feature group bounds
   map.fitBounds(bounds, {
-    paddingTopLeft: [geometry ? sidebar : 0, 10],
+    paddingTopLeft: [geometry.coordinates ? sidebar : 0, 10],
   });
 }
