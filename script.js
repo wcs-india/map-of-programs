@@ -49,19 +49,19 @@ let latlngs = [];
 fetchData("great-indian-bustard-sites.geojson")
   .then((data) => {
     // create markers width "marker-options-id"
-    data.map((marker) => {
+    data.map((polygon) => {
       featureGroups.push(
-        L.marker(marker.geometry.coordinates, {
+        L.polygon(polygon.geometry.coordinates, {
           icon: L.divIcon({
             className: "leaflet-marker-icon",
-            html: `${marker.fid}`,
+            html: `${polygon.fid}`,
             iconSize: L.point(30, 30),
             popupAnchor: [3, -5],
           }),
           "marker-options-id": marker.fid,
         })
       );
-      latlngs.push(marker.geometry.coordinates);
+      latlngs.push(polygon.geometry.coordinates);
     });
 
         return data;
@@ -69,8 +69,8 @@ fetchData("great-indian-bustard-sites.geojson")
   .then((data) => {
     // create feature group
     // add markers to map
-    featureGroups.map((marker) => {
-      marker.addTo(map);
+    featureGroups.map((polygon) => {
+      polygon.addTo(map);
     });
 
     // create feature group with markers
@@ -83,15 +83,15 @@ fetchData("great-indian-bustard-sites.geojson")
 
     // add event listener to markers to open sidebar
     groupBounds.on("click", function (e) {
-      if (e.layer instanceof L.Marker) {
+      if (e.layer instanceof L.Polygon) {
         showSidebarWidthText(e.layer.options["marker-options-id"]);
       }
     });
 
     // add comment to sodebar depending on marker id
     function showSidebarWidthText(id) {
-      data.filter((marker) => {
-        if (marker.fid === id) {
+      data.filter((polygon) => {
+        if (polygon.fid === id) {
           document.body.classList.add("active-sidebar");
           addContentToSidebar(marker);
         }
@@ -139,8 +139,8 @@ function closeSidebar() {
 // --------------------------------------------------
 // add content to sidebar
 
-function addContentToSidebar(marker) {
-  const { fid, Program, small, description, img, geometry } = marker;
+function addContentToSidebar(polygon) {
+  const { fid, Program, small, description, img, geometry } = polygon;
   const smallInfo = small !== undefined ? `<small>${small}</small>` : "";
 
   // create sidebar content
@@ -174,8 +174,8 @@ function addContentToSidebar(marker) {
 function boundsMap(geometry) {
   const sidebar = document.querySelector(".sidebar").offsetWidth;
 
-  const marker = L.marker(geometry.coordinates);
-  const group = L.featureGroup([marker]);
+  const polygon = L.polygon(geometry.coordinates);
+  const group = L.featureGroup([polygon]);
 
   // bounds depending on whether we have a marker or not
   const bounds = geometry.coordinates ? group.getBounds() : groupBounds.getBounds();
