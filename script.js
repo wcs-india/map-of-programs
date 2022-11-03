@@ -40,20 +40,21 @@ const customOptions = {
   keepInView: true, // Set it to true if you want to prevent users from panning the popup off of the screen while it is open.
 };
 function onEachFeature(feature, layer) {
-  layer..bindPopup(customPopup, customOptions)
+  layer.bindPopup(customPopup, customOptions)
   .on("click", clickZoom)
   .addTo(map);
 
 // adding geojson by fetch
 // of course you can use jquery, axios etc.
-fetch("great-indian-bustard-sites.geojson")
+fetch("../static/great-indian-bustard-sites.geojson")
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
     // use geoJSON
     L.geoJSON(data, {
-      onEachFeature: onEachFeature,
+      style: {color: '#42ff3f', weight:1, fillOpacity: 0},
+      onEachFeature: onEachFeature
     }).addTo(map);
   });
 
