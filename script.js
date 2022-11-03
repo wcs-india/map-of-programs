@@ -68,9 +68,9 @@ info.onAdd = function (map) {
 };
 
 // Edit info box text and variables to match those in your GeoJSON data
-info.update = function (properties) {
-  this._div.innerHTML = '<h4>Circle Name <h4>' +  (properties ?
-    '<b>' + properties.Program + ' ' + '</b><br /><b>' + properties.description + '</b><br />' 
+info.update = function (props) {
+  this._div.innerHTML = '<h4>Circle Name <h4>' +  (props ?
+    '<b>' + props.Program + ' ' + '</b><br /><b>' + props.description + '</b><br />' 
     : 'Click on a Circle');
 };  
 
@@ -94,7 +94,7 @@ fetch("great-indian-bustard-sites.geojson")
           // bindPopup
           getVoivodeshipName(feature, layer);
           // show voivodeship
-          addTextToDiv(feature.properties.nazwa);
+          addTextToDiv(feature.properties.Program);
           this.openPopup();
           // style
           this.setStyle({
@@ -116,7 +116,7 @@ fetch("great-indian-bustard-sites.geojson")
         });
         layer.on("click", function () {
           // adding the province name to the visible div
-          addTextToDiv(feature.properties.nazwa);
+          addTextToDiv(feature.properties.Program);
         });
       },
     }).addTo(map);
