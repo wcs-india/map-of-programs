@@ -46,9 +46,8 @@ $.getJSON("great-indian-bustard-sites.geojson", function (data) {
     style: {color: '#42ff3f', weight:1, fillOpacity: 1},
         onEachFeature: onEachFeature
   })
-  .bindPopup(customPopup, customOptions)
-  .on("click", clickZoom)
-  .addTo(map);
+.bindPopup(customPopup, customOptions)
+.addTo(map);
   controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD VILLAGES</b>');
 });
 
@@ -56,10 +55,7 @@ $.getJSON("counter-wildlife-trafficking-sites.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
     style: {color: '#42ff3f', weight:1, fillOpacity: 1},
         onEachFeature: onEachFeature
-  })
-.bindPopup(customPopup, customOptions)
-  .on("click", clickZoom)
-  .addTo(map);
+  }).addTo(map);
   controlLayers.addOverlay(geoJsonLayer, '<b>COUNTER WILDLIFE TRAFFICKING WORKSHOPS</b>');
 });
 
