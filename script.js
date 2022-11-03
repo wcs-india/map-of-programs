@@ -21,14 +21,16 @@ const map = L.map("map", config).setView([lat, lng], zoom);
 
 // Used to load and display tile layers on the map
 // Most tile servers require attribution, which you can set under `Layer`
-new L.esri.basemapLayer('Imagery').addTo(map);
-new L.esri.basemapLayer('ImageryLabels').addTo(map);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
 // ------------------------------------------------------------
 // async function to get data from json
 async function fetchData(url) {
   try {
     const response = await fetch(url);
-    const data = await response.json();
+    const data = await response.geojson();
     return data;
   } catch (err) {
     console.error(err);
