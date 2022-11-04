@@ -21,8 +21,8 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 // specify popup options
 const customOptions = {
-  minWidth: "100", // set max-width
-  maxWidth: "100",
+  minWidth: "50", // set max-width
+  maxWidth: "50",
   keepInView: true, // Set it to true if you want to prevent users from panning the popup off of the screen while it is open.
 };
 
@@ -159,7 +159,7 @@ $.getJSON("human-wildlife-conflict.geojson", function (data) {
 })
 .bindPopup(hwcPopup, customOptions)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>HUMAN WILDLIFE CONFLICT PROGRAM</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>HUMAN WILDLIFE INTERACTIONS PROGRAM</b>');
 });
 
 
