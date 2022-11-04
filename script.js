@@ -20,12 +20,12 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 // custom popup image + text
 const gibPopup =
-  '<div class="customPopup"><figure><img src="great-india-bustard.JPG"><figcaption>GREAT INDIAN BUSTARD SITES</figcaption></figure><div>People from the Mangniyar community from this landscape are recognised for their folk music. We are currently working on outreach activities within the schools of this region where we share  information about Great Indian Bustard and the Orans - traditionally community-conserved areas, through music performances by the Mangniyars. The songs performed during these activities are written by Mangniyars by incorporating information on the ecology of the bird and Orans. <a href="https://india.wcs.org/wildlife/great-indian-bustard" target="_blank">→ show more</a></div></div>';
+  '<div class="customPopup"><figure><img src="great-india-bustard.JPG"><figcaption><b>GREAT INDIAN BUSTARD VILLAGES</b></figcaption></figure><div>People from the Mangniyar community from this landscape are recognised for their folk music. We are currently working on outreach activities within the schools of this region where we share  information about Great Indian Bustard and the Orans - traditionally community-conserved areas, through music performances by the Mangniyars. The songs performed during these activities are written by Mangniyars by incorporating information on the ecology of the bird and Orans. <a href="https://india.wcs.org/wildlife/great-indian-bustard" target="_blank">→ show more</a></div></div>';
 
 // specify popup options
 const customOptions = {
   minWidth: "220", // set max-width
-  maxWidth: "400",
+  maxWidth: "200",
   keepInView: true, // Set it to true if you want to prevent users from panning the popup off of the screen while it is open.
 };
 
@@ -36,72 +36,24 @@ function clickZoom(e) {
 
 $.getJSON("great-indian-bustard-sites.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#42ff3f', weight:1, fillOpacity: 1},
-        onEachFeature: onEachFeature
+    style: {color: '#42ff3f', weight:1, fillOpacity: 1}
+        
   })
 .bindPopup(gibPopup, customOptions)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD VILLAGES</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD PROGRAM</b>');
 });
+
+const cwtPopup =
+  '<div class="customPopup"><figure><img src="CWT-training-kit.png"><figcaption><b>COUNTER WILDLIFE TRAFFICKING WORKSHOPS</b></figcaption></figure><div>WCS-India’s Counter Wildlife Trafficking program was initiated in 2018 to address the growing challenge of wildlife trafficking in India. CWT works across India, with a special focus on Northeast India, Western Ghats and Eastern Ghats. Our activities currently are: Conducting capacity building workshops for officers on effective prevention, detection, investigation, and prosecution of wildlife. Providing technical support to law enforcement officers in multiple aspects of wildlife crime<a href="https://india.wcs.org/Counter-Wildlife-Trafficking-CWT" target="_blank">→ show more</a></div></div>';
+
 
 $.getJSON("counter-wildlife-trafficking-sites.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#42ff3f', weight:1, fillOpacity: 1},
-        onEachFeature: onEachFeature
-  })
-.bindPopup(layer.feature.properties.description)
+    style: {color: '#42ff3f', weight:1, fillOpacity: 1}
+        
+.bindPopup(cwtPopup, customOptions)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>COUNTER WILDLIFE TRAFFICKING WORKSHOPS</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>COUNTER WILDLIFE TRAFFICKING PROGRAM</b>');
 });
 
-
-// This highlights the layer on hover, also for mobile
-function highlightFeature(e) {
-  resetHighlight(e);
-  var layer = e.target;
-  layer.setStyle({
-    weight: 2,
-    color: '#42ff3f',
-    fillOpacity: 0
-  });
-  info.update(layer.feature.properties);
-}
-
-// This resets the highlight after hover moves away
-function resetHighlight(e) {
-  geoJsonLayer.setStyle(style);
-  info.update();
-}
-
-function zoomToFeature(e) {
-    map.fitBounds(e.target.getBounds());
-}
-
-// This instructs highlight and reset functions on hover movement
-function onEachFeature(feature, layer) {
-  layer.on({
-    mouseover: highlightFeature,
-    mouseout: resetHighlight,
-    click: highlightFeature,
-    click: zoomToFeature
-  });
-}
-
-
-// Creates an info box on the map
-var info = L.control();
-info.onAdd = function (map) {
-  this._div = L.DomUtil.create('div', 'info');
-  this.update();
-  return this._div;
-};
-
-// Edit info box text and variables to match those in your GeoJSON data
-info.update = function (props) {
-  this._div.innerHTML = '<h4>Circle Name <h4>' +  (props ?
-    '<b>' + props.Program + ' ' + '</b><br /><b>' + props.description + '</b><br />' 
-    : 'Click on a Circle');
-};  
-
-
-info.addTo(map);
