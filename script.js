@@ -22,7 +22,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 // specify popup options
 const customOptions = {
   minWidth: "200", // set max-width
-  maxWidth: auto,
+  maxWidth: "auto",
   keepInView: true, // Set it to true if you want to prevent users from panning the popup off of the screen while it is open.
 };
 
@@ -44,7 +44,7 @@ $.getJSON("great-indian-bustard-sites.geojson", function (data) {
   })
 .bindPopup(gibPopup, customOptions)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD PROGRAM</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD</b>');
 });
 
 //--------------------------------------------------------------------------------/
@@ -61,7 +61,7 @@ $.getJSON("counter-wildlife-trafficking-sites.geojson", function (data) {
 })
 .bindPopup(cwtPopup, customOptions)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>COUNTER WILDLIFE TRAFFICKING PROGRAM</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>COUNTER WILDLIFE TRAFFICKING</b>');
 });
 
 ///---------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ $.getJSON("livelihood-support.geojson", function (data) {
 })
 .bindPopup(livsupPopup, customOptions)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>LIVELIHOOD SUPPORT PROGRAM</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>LIVELIHOOD SUPPORT</b>');
 });
 
 
@@ -94,14 +94,14 @@ $.getJSON("eastern-ghats.geojson", function (data) {
 })
 .bindPopup(egPopup, customOptions)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>EASTERN GHATS PROGRAM</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>EASTERN GHATS</b>');
 });
 
 
 ///---------------------------------------------------------------------------------------
 
 const chePopup =
-  '<div class="customPopup"><figure><img src="cwe-photo.JPG"><figcaption><b>CARNIVORE AND HERBIVORE ECOLOGY AND CONSERVATION</b></figcaption></figure><div>Tigers are a priority species for WCS-India. Our long-term goal for tiger conservation efforts is to support Government efforts to ensure that there are multiple thriving populations of tigers in India. We contribute to the conservation of tigers primarily through the wide variety of field activities we pursue in the Western and Eastern Ghats landscapes, as well as through policy efforts, voluntary relocation, carnivore conflict management, support to enforcement agencies, and capacity building.<a href="https://india.wcs.org/Programmes/Carnivore-Herbivore-Ecology-Conservation" target="_blank">→ show more</a></div></div>';
+  '<div class="customPopup"><figure><img src="cwe-photo.JPG"><figcaption><b>CARNIVORE & HERBIVORE ECOLOGY & CONSERVATION</b></figcaption></figure><div>Tigers are a priority species for WCS-India. Our long-term goal for tiger conservation efforts is to support Government efforts to ensure that there are multiple thriving populations of tigers in India. We contribute to the conservation of tigers primarily through the wide variety of field activities we pursue in the Western and Eastern Ghats landscapes, as well as through policy efforts, voluntary relocation, carnivore conflict management, support to enforcement agencies, and capacity building.<a href="https://india.wcs.org/Programmes/Carnivore-Herbivore-Ecology-Conservation" target="_blank">→ show more</a></div></div>';
 
 
 $.getJSON("carnivore-herbivore-ecology.geojson", function (data) {
@@ -111,7 +111,7 @@ $.getJSON("carnivore-herbivore-ecology.geojson", function (data) {
 })
 .bindPopup(chePopup, customOptions)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>CARNIVORE AND HERBIVORE ECOLOGY AND CONSERVATION PROGRAM</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>CARNIVORE & HERBIVORE ECOLOGY & CONSERVATION</b>');
 });
 
 ///---------------------------------------------------------------------------------------
@@ -127,7 +127,7 @@ $.getJSON("marine-program-sites.geojson", function (data) {
 })
 .bindPopup(marinePopup, customOptions)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>MARINE PROGRAM</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>MARINE</b>');
 });
 
 ///---------------------------------------------------------------------------------------
@@ -138,12 +138,12 @@ const hwcPopup =
 
 $.getJSON("human-wildlife-conflict.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#553377', weight:1, fillOpacity: 1}
+    style: {color: '#6040a0', weight:1, fillOpacity: 1}
         
 })
 .bindPopup(hwcPopup, customOptions)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>HUMAN WILDLIFE CONFLICT PROGRAM</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>HUMAN WILDLIFE CONFLICT</b>');
 });
 
 ///---------------------------------------------------------------------------------------
@@ -159,7 +159,7 @@ $.getJSON("human-wildlife-conflict.geojson", function (data) {
 })
 .bindPopup(hwcPopup, customOptions)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>HUMAN WILDLIFE INTERACTIONS PROGRAM</b>');
+controlLayers.addOverlay(geoJsonLayer, '<b>HUMAN WILDLIFE INTERACTIONS</b>');
 });
 
 
