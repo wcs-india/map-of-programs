@@ -1,8 +1,8 @@
 // Edit the center point and zoom level
 var map = L.map('map', {
   center: [20,78],
-  zoom: 8,
-  minZoom : 5,
+  zoom: 5,
+  minZoom : 4,
   scrollWheelZoom: true
 });
 
@@ -21,8 +21,8 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 // specify popup options
 const customOptions = {
-  minWidth: "220", // set max-width
-  maxWidth: "200",
+  minWidth: "100", // set max-width
+  maxWidth: "100",
   keepInView: true, // Set it to true if you want to prevent users from panning the popup off of the screen while it is open.
 };
 
