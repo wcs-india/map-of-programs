@@ -1,12 +1,12 @@
 let config = {
   minZoom: 1,
-  maxZoom: 18,
+  maxZoom: 10,
 };
 // magnification with which the map will start
-const zoom = 6;
-// co-ordinates
-const lat = 22;
-const lng = 77;
+const zoom = 4;
+// co-ordinates 24.524496, 77.951236
+const lat = 24.5;
+const lng = 77.9;
 
 // calling map
 const map = L.map("map", config).setView([lat, lng], zoom);
@@ -16,10 +16,11 @@ var controlLayers = L.control.layers( null, null, {
      collapsed: false // truw = closed by default
     }).addTo(map);
 
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution:
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
+
+L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
+  maxZoom: 20,
+  attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);;
 
 const funny = L.icon({
   iconUrl: "http://grzegorztomicki.pl/serwisy/pin.png",
@@ -116,7 +117,7 @@ const chePopup =
 
 $.getJSON("carnivore-herbivore-ecology.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#031e33', weight:1, fillOpacity: 1}
+    style: {color: '#b2392f', weight:1, fillOpacity: 1}
         
 })
 .bindPopup(chePopup, customOptions).on("click", clickZoom)
