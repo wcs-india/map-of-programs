@@ -21,8 +21,8 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 // specify popup options
 const customOptions = {
-  minWidth: "50", // set max-width
-  maxWidth: "50",
+  minWidth: "200", // set max-width
+  maxWidth: auto,
   keepInView: true, // Set it to true if you want to prevent users from panning the popup off of the screen while it is open.
 };
 
