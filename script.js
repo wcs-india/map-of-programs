@@ -152,7 +152,7 @@ const hwiPopup =
   '<div class="customPopup"><figure><img src="human-wildlife-interactions.JPG"><figcaption><b>HUMAN WILDLIFE INTERACTIONS PROGRAM</b></figcaption></figure><div>Today human-wildlife conflict is an issue that has gained a lot of importance globally and nationally. While it negatively affects both humans and wildlife, many of the latter are endangered and threatened. WCS-India’s work with leopards has been on the forefront of this field of knowledge, with its continuous study of not just the ecology of the wildlife, but also how humans react and respond to the presence of the wildlife in human-use landscapes. <a href="https://india.wcs.org/Programmes/Human-wildlife-interactions" target="_blank">→ show more</a></div></div>';
 
 
-$.getJSON("human-wildlife-conflict.geojson", function (data) {
+$.getJSON("human-wildlife-interactions.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
     style: {color: '#e0b2fa', weight:1, fillOpacity: 1}
         
