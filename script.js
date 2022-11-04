@@ -42,7 +42,7 @@ $.getJSON("great-indian-bustard-sites.geojson", function (data) {
     style: {color: '#42ff3f', weight:1, fillOpacity: 1}
         
   })
-.bindPopup(gibPopup, customOptions)
+.bindPopup(gibPopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD</b>');
 });
@@ -59,7 +59,7 @@ $.getJSON("counter-wildlife-trafficking-sites.geojson", function (data) {
     style: {color: '#80032f', weight:1, fillOpacity: 1}
         
 })
-.bindPopup(cwtPopup, customOptions)
+.bindPopup(cwtPopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>COUNTER WILDLIFE TRAFFICKING</b>');
 });
@@ -75,7 +75,7 @@ $.getJSON("livelihood-support.geojson", function (data) {
     style: {color: '#ce6251', weight:1, fillOpacity: 1}
         
 })
-.bindPopup(livsupPopup, customOptions)
+.bindPopup(livsupPopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>LIVELIHOOD SUPPORT</b>');
 });
@@ -92,7 +92,7 @@ $.getJSON("eastern-ghats.geojson", function (data) {
     style: {color: '#42fe8c', weight:1, fillOpacity: 1}
         
 })
-.bindPopup(egPopup, customOptions)
+.bindPopup(egPopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>EASTERN GHATS</b>');
 });
@@ -109,7 +109,7 @@ $.getJSON("carnivore-herbivore-ecology.geojson", function (data) {
     style: {color: '#031e33', weight:1, fillOpacity: 1}
         
 })
-.bindPopup(chePopup, customOptions)
+.bindPopup(chePopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>CARNIVORE & HERBIVORE ECOLOGY & CONSERVATION</b>');
 });
@@ -125,7 +125,7 @@ $.getJSON("marine-program-sites.geojson", function (data) {
     style: {color: '#88aaaa', weight:1, fillOpacity: 1}
         
 })
-.bindPopup(marinePopup, customOptions)
+.bindPopup(marinePopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>MARINE</b>');
 });
@@ -141,7 +141,7 @@ $.getJSON("human-wildlife-conflict.geojson", function (data) {
     style: {color: '#6040a0', weight:1, fillOpacity: 1}
         
 })
-.bindPopup(hwcPopup, customOptions)
+.bindPopup(hwcPopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>HUMAN WILDLIFE CONFLICT</b>');
 });
@@ -157,7 +157,7 @@ $.getJSON("human-wildlife-interactions.geojson", function (data) {
     style: {color: '#e0b2fa', weight:1, fillOpacity: 1}
         
 })
-.bindPopup(hwcPopup, customOptions)
+.bindPopup(hwcPopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>HUMAN WILDLIFE INTERACTIONS</b>');
 });
