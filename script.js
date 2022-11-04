@@ -167,7 +167,7 @@ $.getJSON("human-wildlife-interactions.geojson", function (data) {
     style: {color: '#e37934', weight:1, fillOpacity: 1}
         
 })
-.bindPopup(hwcPopup, customOptions).on("click", clickZoom)
+.bindPopup(hwiPopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>HUMAN WILDLIFE INTERACTIONS</b>');
 });
