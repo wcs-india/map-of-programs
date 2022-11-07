@@ -76,7 +76,7 @@ const cwtPopup =
 
 
 $.getJSON("counter-wildlife-trafficking-sites.geojson", function (data) {
-  cetlayer = L.geoJson(data, { icon: greenIcon})
+  cwtlayer = L.geoJson(data, { icon: greenIcon})
 .bindPopup(cwtPopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(cwtlayer, '<b>COUNTER WILDLIFE TRAFFICKING</b>');
