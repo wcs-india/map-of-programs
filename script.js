@@ -174,3 +174,18 @@ controlLayers.addOverlay(geoJsonLayer, '<b>HUMAN WILDLIFE INTERACTIONS</b>');
 });
 
 
+///-----------------------------------CENTRAL WESTERN GHATS----------------------------------------------------
+
+const cwgPopup =
+  '<div class="customPopup"><figure><img src="human-wildlife-interactions.JPG"><figcaption><b>CENTRAL WESTERN GHATS PROGRAM</b></figcaption></figure><div>The main objectives of this prgram are enhancing protection of crucial wildlife habitats by notifying new Protected areas (PA) and expanding existing Protected areas. Consolidation of critical wildlife habitats by  relocating strategic small hamlets which are inside protected areas. Establishing & developing strong local intelligence network to effectively tackle and reduce the Forest & wildlife related offenses like Illegal poaching of wildlife, Forest encroachment, Smuggling and trade through effective collaboration with various enforcement agencies. Ensuring better protection and management of Protected areas through supporting forest department and policy level interventions. <a href="https://india.wcs.org/Programmes/Western-Ghats" target="_blank">→ show more</a></div></div>';
+
+
+$.getJSON("western-ghats-sites.geojson", function (data) {
+  geoJsonLayer = L.geoJson(data, {
+    style: {color: '#0CDF76', weight:1, fillOpacity: 1}
+        
+})
+.bindPopup(cwgPopup, customOptions).on("click", clickZoom)
+.addTo(map);
+controlLayers.addOverlay(geoJsonLayer, '<b>CENTREAL WESTERN GHATS</b>');
+});
