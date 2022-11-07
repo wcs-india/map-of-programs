@@ -22,11 +22,23 @@ L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
   attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);;
 
-const funny = L.icon({
-  iconUrl: "http://grzegorztomicki.pl/serwisy/pin.png",
-  iconSize: [30, 40], // size of the icon
-  iconAnchor: [20, 58], // changed marker icon position
-  popupAnchor: [0, -60], // changed popup position
+var yellowIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+
+var greenIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
 });
 
 
@@ -50,10 +62,7 @@ const gibPopup =
   '<div class="customPopup"><figure><img src="great-india-bustard.JPG"><figcaption><b>GREAT INDIAN BUSTARD VILLAGES</b></figcaption></figure><div>People from the Mangniyar community from this landscape are recognised for their folk music. We are currently working on outreach activities within the schools of this region where we share  information about Great Indian Bustard and the Orans - traditionally community-conserved areas, through music performances by the Mangniyars. The songs performed during these activities are written by Mangniyars by incorporating information on the ecology of the bird and Orans. <a href="https://india.wcs.org/wildlife/great-indian-bustard" target="_blank">→ show more</a></div></div>';
 
 $.getJSON("great-indian-bustard-sites.geojson", function (data) {
-  geoJsonLayer = L.geoJson(data, {
-  icon: funny,
-        
-  })
+  geoJsonLayer = L.geoJson(data, {icon: yellowIcon})
 .bindPopup(gibPopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD</b>');
@@ -67,9 +76,7 @@ const cwtPopup =
 
 
 $.getJSON("counter-wildlife-trafficking-sites.geojson", function (data) {
-  geoJsonLayer = L.geoJson(data, {
-    
-})
+  geoJsonLayer = L.geoJson(data, { icon: greenIcon})
 .bindPopup(cwtPopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(geoJsonLayer, '<b>COUNTER WILDLIFE TRAFFICKING</b>');
@@ -83,7 +90,7 @@ const livsupPopup =
 
 $.getJSON("livelihood-support.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#ce6251', weight:1, fillOpacity: 1}
+    style: {color: '#ce6251', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(livsupPopup, customOptions).on("click", clickZoom)
@@ -100,7 +107,7 @@ const egPopup =
 
 $.getJSON("eastern-ghats.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#40bd81', weight:1, fillOpacity: 1}
+    style: {color: '#40bd81', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(egPopup, customOptions).on("click", clickZoom)
@@ -117,7 +124,7 @@ const chePopup =
 
 $.getJSON("carnivore-herbivore-ecology.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#b2392f', weight:1, fillOpacity: 1}
+    style: {color: '#b2392f', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(chePopup, customOptions).on("click", clickZoom)
@@ -133,7 +140,7 @@ const marinePopup =
 
 $.getJSON("marine-program-sites.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#2986cc', weight:1, fillOpacity: 1}
+    style: {color: '#2986cc', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(marinePopup, customOptions).on("click", clickZoom)
@@ -149,7 +156,7 @@ const hwcPopup =
 
 $.getJSON("human-wildlife-conflict.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#6040a0', weight:1, fillOpacity: 1}
+    style: {color: '#6040a0', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(hwcPopup, customOptions).on("click", clickZoom)
@@ -165,7 +172,7 @@ const hwiPopup =
 
 $.getJSON("human-wildlife-interactions.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#e37934', weight:1, fillOpacity: 1}
+    style: {color: '#e37934', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(hwiPopup, customOptions).on("click", clickZoom)
@@ -182,7 +189,7 @@ const cwgPopup =
 
 $.getJSON("western-ghats-sites.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#0CDF76', weight:1, fillOpacity: 1}
+    style: {color: '#0CDF76', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(cwgPopup, customOptions).on("click", clickZoom)
