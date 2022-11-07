@@ -62,10 +62,10 @@ const gibPopup =
   '<div class="customPopup"><figure><img src="great-india-bustard.JPG"><figcaption><b>GREAT INDIAN BUSTARD VILLAGES</b></figcaption></figure><div>People from the Mangniyar community from this landscape are recognised for their folk music. We are currently working on outreach activities within the schools of this region where we share  information about Great Indian Bustard and the Orans - traditionally community-conserved areas, through music performances by the Mangniyars. The songs performed during these activities are written by Mangniyars by incorporating information on the ecology of the bird and Orans. <a href="https://india.wcs.org/wildlife/great-indian-bustard" target="_blank">→ show more</a></div></div>';
 
 $.getJSON("great-indian-bustard-sites.geojson", function (data) {
-  geoJsonLayer = L.geoJson(data, {icon: yellowIcon})
+  giblayer = L.geoJson(data, {icon: yellowIcon})
 .bindPopup(gibPopup, customOptions).on("click", clickZoom)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>GREAT INDIAN BUSTARD</b>');
+controlLayers.addOverlay(giblayer, '<b>GREAT INDIAN BUSTARD</b>');
 });
 
 //----------------------------COUNTER WILDLIFE TRAFFICKING----------------------------------------------------/
@@ -76,10 +76,10 @@ const cwtPopup =
 
 
 $.getJSON("counter-wildlife-trafficking-sites.geojson", function (data) {
-  geoJsonLayer = L.geoJson(data, { icon: greenIcon})
+  cetlayer = L.geoJson(data, { icon: greenIcon})
 .bindPopup(cwtPopup, customOptions).on("click", clickZoom)
 .addTo(map);
-controlLayers.addOverlay(geoJsonLayer, '<b>COUNTER WILDLIFE TRAFFICKING</b>');
+controlLayers.addOverlay(cwtlayer, '<b>COUNTER WILDLIFE TRAFFICKING</b>');
 });
 
 ///-------------------------LIVELIHOOD SUPPORT--------------------------------------------------------------
@@ -90,7 +90,7 @@ const livsupPopup =
 
 $.getJSON("livelihood-support.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#ce6251', weight:1, fillOpacity: 1, color: 'black'}
+    style: {fillColor: '#ce6251', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(livsupPopup, customOptions).on("click", clickZoom)
@@ -107,7 +107,7 @@ const egPopup =
 
 $.getJSON("eastern-ghats.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#40bd81', weight:1, fillOpacity: 1, color: 'black'}
+    style: {fillColor: '#40bd81', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(egPopup, customOptions).on("click", clickZoom)
@@ -124,7 +124,7 @@ const chePopup =
 
 $.getJSON("carnivore-herbivore-ecology.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#b2392f', weight:1, fillOpacity: 1, color: 'black'}
+    style: {fillColor: '#b2392f', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(chePopup, customOptions).on("click", clickZoom)
@@ -140,7 +140,7 @@ const marinePopup =
 
 $.getJSON("marine-program-sites.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#2986cc', weight:1, fillOpacity: 1, color: 'black'}
+    style: {fillColor: '#2986cc', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(marinePopup, customOptions).on("click", clickZoom)
@@ -156,7 +156,7 @@ const hwcPopup =
 
 $.getJSON("human-wildlife-conflict.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#6040a0', weight:1, fillOpacity: 1, color: 'black'}
+    style: {fillColor: '#6040a0', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(hwcPopup, customOptions).on("click", clickZoom)
@@ -172,7 +172,7 @@ const hwiPopup =
 
 $.getJSON("human-wildlife-interactions.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#e37934', weight:1, fillOpacity: 1, color: 'black'}
+    style: {fillColor: '#e37934', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(hwiPopup, customOptions).on("click", clickZoom)
@@ -189,7 +189,7 @@ const cwgPopup =
 
 $.getJSON("western-ghats-sites.geojson", function (data) {
   geoJsonLayer = L.geoJson(data, {
-    style: {color: '#0CDF76', weight:1, fillOpacity: 1, color: 'black'}
+    style: {fillColor: '#0CDF76', weight:1, fillOpacity: 1, color: 'black'}
         
 })
 .bindPopup(cwgPopup, customOptions).on("click", clickZoom)
