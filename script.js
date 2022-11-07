@@ -1,6 +1,6 @@
 let config = {
   minZoom: 1,
-  maxZoom: 10,
+  maxZoom: 15,
 };
 // magnification with which the map will start
 const zoom = 4;
@@ -177,7 +177,7 @@ controlLayers.addOverlay(geoJsonLayer, '<b>HUMAN WILDLIFE INTERACTIONS</b>');
 ///-----------------------------------CENTRAL WESTERN GHATS----------------------------------------------------
 
 const cwgPopup =
-  '<div class="customPopup"><figure><img src="human-wildlife-interactions.JPG"><figcaption><b>CENTRAL WESTERN GHATS PROGRAM</b></figcaption></figure><div>The main objectives of this prgram are enhancing protection of crucial wildlife habitats by notifying new Protected areas (PA) and expanding existing Protected areas. Consolidation of critical wildlife habitats by  relocating strategic small hamlets which are inside protected areas. Establishing & developing strong local intelligence network to effectively tackle and reduce the Forest & wildlife related offenses like Illegal poaching of wildlife, Forest encroachment, Smuggling and trade through effective collaboration with various enforcement agencies. Ensuring better protection and management of Protected areas through supporting forest department and policy level interventions. <a href="https://india.wcs.org/Programmes/Western-Ghats" target="_blank">→ show more</a></div></div>';
+  '<div class="customPopup"><figure><img src="Western-ghats.jpg"><figcaption><b>CENTRAL WESTERN GHATS PROGRAM</b></figcaption></figure><div>The main objectives of this prgram are enhancing protection of crucial wildlife habitats by notifying new Protected areas (PA) and expanding existing Protected areas. Consolidation of critical wildlife habitats by  relocating strategic small hamlets which are inside protected areas. Establishing & developing strong local intelligence network to effectively tackle and reduce the Forest & wildlife related offenses like Illegal poaching of wildlife, Forest encroachment, Smuggling and trade through effective collaboration with various enforcement agencies. Ensuring better protection and management of Protected areas through supporting forest department and policy level interventions. <a href="https://india.wcs.org/Programmes/Western-Ghats" target="_blank">→ show more</a></div></div>';
 
 
 $.getJSON("western-ghats-sites.geojson", function (data) {
