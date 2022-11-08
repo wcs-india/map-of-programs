@@ -62,7 +62,7 @@ const gibPopup =
   '<div class="customPopup"><figure><img src="great-india-bustard.JPG"><figcaption><b>GREAT INDIAN BUSTARD VILLAGES</b></figcaption></figure><div>People from the Mangniyar community from this landscape are recognised for their folk music. We are currently working on outreach activities within the schools of this region where we share  information about Great Indian Bustard and the Orans - traditionally community-conserved areas, through music performances by the Mangniyars. The songs performed during these activities are written by Mangniyars by incorporating information on the ecology of the bird and Orans. <a href="https://india.wcs.org/wildlife/great-indian-bustard" target="_blank">→ show more</a></div></div>';
 
 $.getJSON("great-indian-bustard-sites.geojson", function (data) {
-  giblayer = L.geoJson(data, {icon: yellowIcon})
+  giblayer = L.marker(data, {icon: yellowIcon})
 .bindPopup(gibPopup, customOptions).on("click", clickZoom)
 .addTo(map);
 controlLayers.addOverlay(giblayer, '<b>GREAT INDIAN BUSTARD</b>');
